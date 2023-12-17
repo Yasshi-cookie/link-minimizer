@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./.docker/php/Dockerfile
+    volumes:
+      - .:/data
+
+  web:
+    build:
+      context: .
+      dockerfile: ./.docker/nginx/Dockerfile
+    ports:
+      - 60002:80
+    volumes:
+      - .:/data
+
+  db:
+    build:
+      context: .
+      dockerfile: ./.docker/mysql/Dockerfile
+    ports:
+      - '3306:3306'
+    volumes:
+      - db-store:/var/lib/mysql
+
+volumes:
+  db-store:
