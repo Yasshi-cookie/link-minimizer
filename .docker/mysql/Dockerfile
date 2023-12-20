@@ -1,6 +1,6 @@
 FROM mysql/mysql-server:8.0
 
-ENV MYSQL_DATABASE=practice_backend \
+ENV MYSQL_DATABASE=link_minimizer \
   MYSQL_USER=user \
   MYSQL_PASSWORD=password \
   MYSQL_ROOT_PASSWORD=password \
