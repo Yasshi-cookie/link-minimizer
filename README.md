@@ -41,7 +41,9 @@ prettierの設定を行う。参考：https://github.com/Yasshi-cookie/link-mini
 - php.ini
 - .vscode/launch.json
 
-参考：https://github.com/Yasshi-cookie/link-minimizer/commit/eb0b86a7443be60b1f83ba4d6781eb7157f70330
+参考：
+- https://github.com/Yasshi-cookie/link-minimizer/commit/eb0b86a7443be60b1f83ba4d6781eb7157f70330
+- https://github.com/Yasshi-cookie/link-minimizer/commit/a617d8b12cd6ee952b5a9db6fa0fe59a94b91551
 
 Profiling機能を使う場合は、公式ドキュメントに記載されている各OSごとに用意されている可視化ツールをインストールしてください。
 [Xdebug Profiling introductions](https://xdebug.org/docs/profiler#Introduction)
