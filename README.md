@@ -36,4 +36,12 @@ prettierの設定を行う。参考：https://github.com/Yasshi-cookie/link-mini
 公式ドキュメント：https://github.com/prettier/plugin-php
 
 ## ⑤Xdebugの設定を追加
+下記のファイルを適宜設定する
+- phpのDockerファイル
+- php.ini
+- .vscode/launch.json
+
 参考：https://github.com/Yasshi-cookie/link-minimizer/commit/eb0b86a7443be60b1f83ba4d6781eb7157f70330
+
+Profiling機能を使う場合は、公式ドキュメントに記載されている各OSごとに用意されている可視化ツールをインストールしてください。
+[Xdebug Profiling introductions](https://xdebug.org/docs/profiler#Introduction)
