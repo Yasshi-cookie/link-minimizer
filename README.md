@@ -36,7 +36,6 @@ prettierの設定を行う。参考：https://github.com/Yasshi-cookie/link-mini
 公式ドキュメント：https://github.com/prettier/plugin-php
 
 ## ⑤Xdebugの設定を追加
-VSCode拡張機能「PHP Debug」を追加する
 
 下記のファイルを適宜設定する
 - phpのDockerファイル
@@ -52,7 +51,16 @@ VSCode拡張機能「PHP Debug」を追加する
 [Xdebug Profiling introductions](https://xdebug.org/docs/profiler#Introduction)
 
 # 各ツールについて
+
 ## Xdebug
+
+### 準備
+
+[VSCode拡張機能「PHP Debug」](https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug)を追加する。
+使い方は上記リンクのドキュメントを参照。
+
+### Profilingモード
+
 ・Profilingモードを使って解析結果を出力してデータを可視化したい場合
 ```bash
 $ make profile-mode
