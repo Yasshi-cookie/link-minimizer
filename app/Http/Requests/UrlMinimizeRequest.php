@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\ValueObjects\RedirectableUrl;
+use App\ValueObjects\OriginalUrl;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UrlMinimizeRequest extends FormRequest
@@ -38,10 +38,10 @@ class UrlMinimizeRequest extends FormRequest
     }
 
     /**
-     * @return RedirectableUrl
+     * @return OriginalUrl
      */
-    public function getLongUrl(): RedirectableUrl
+    public function getLongUrl(): OriginalUrl
     {
-        return new RedirectableUrl($this->long_url);
+        return new OriginalUrl($this->long_url);
     }
 }

@@ -2,15 +2,12 @@
 
 namespace App\ValueObjects;
 
-use App\ValueObjects\Exceptions\NotRedirectableUrlException;
+use App\ValueObjects\Exceptions\InvalidUrlException;
 use App\ValueObjects\Traits\GetStringValue;
 use Illuminate\Support\Stringable;
 use Illuminate\Support\Str;
 
-/**
- * リダイレクト可能なUrl
- */
-class RedirectableUrl extends Stringable
+class OriginalUrl extends Stringable
 {
     use GetStringValue;
 
@@ -19,7 +16,7 @@ class RedirectableUrl extends Stringable
      */
     public function __construct(string $url)
     {
-        $this->assertRedirectableUrl($url);
+        $this->assertValidUrl($url);
 
         parent::__construct($url);
     }
@@ -28,10 +25,10 @@ class RedirectableUrl extends Stringable
      * @param string $url
      * @return true
      */
-    private function assertRedirectableUrl(string $url): true
+    private function assertValidUrl(string $url): true
     {
-        if (! Str::isUrl($url, ['http', 'https'])) {
-            throw new NotRedirectableUrlException();
+        if (!Str::isUrl($url, ['http', 'https'])) {
+            throw new InvalidUrlException();
         }
 
         return true;

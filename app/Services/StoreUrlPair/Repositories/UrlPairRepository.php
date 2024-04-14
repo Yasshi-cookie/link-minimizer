@@ -4,7 +4,7 @@ namespace App\Services\StoreUrlPair\Repositories;
 
 use App\Models\UrlPair;
 use App\Services\GenerateMinimizedUrl\GenerateMinimizedUrlService;
-use App\ValueObjects\RedirectableUrl;
+use App\ValueObjects\OriginalUrl;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Log;
 class UrlPairRepository
 {
     /**
-     * @param  RedirectableUrl $originalUrl
+     * @param  OriginalUrl $originalUrl
      * @return UrlPair
      */
-    public function store(RedirectableUrl $originalUrl): UrlPair
+    public function store(OriginalUrl $originalUrl): UrlPair
     {
         DB::beginTransaction();
 
@@ -28,11 +28,14 @@ class UrlPairRepository
             ]);
 
             /** @var GenerateMinimizedUrlService */
-            $generateMinimizedUrlService = app()->make(GenerateMinimizedUrlService::class);
-            $minimizedUrl = $generateMinimizedUrlService->generateFromUrlPairId($urlPair->getId());
+            $generateMinimizedUrlService = app()->make(
+                GenerateMinimizedUrlService::class
+            );
+            $minimizedUrl = $generateMinimizedUrlService->generateFromUrlPairId(
+                $urlPair->getId()
+            );
 
             $urlPair->update(['minimized_url' => $minimizedUrl->getValue()]);
-
         } catch (\Throwable $th) {
             Log::error($th);
             DB::rollBack();
@@ -46,10 +49,10 @@ class UrlPairRepository
     }
 
     /**
-     * @param RedirectableUrl $originalUrl
+     * @param OriginalUrl $originalUrl
      * @return Collection<int, UrlPair>
      */
-    public function getByOriginalUrl(RedirectableUrl $originalUrl): Collection
+    public function getByOriginalUrl(OriginalUrl $originalUrl): Collection
     {
         return UrlPair::whereUserId(auth()->id())
             ->whereOriginalUrl($originalUrl->getValue())
