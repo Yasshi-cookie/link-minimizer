@@ -19,7 +19,9 @@ class UrlMinimizeController extends Controller
      */
     public function minimize(UrlMinimizeRequest $request): JsonResponse
     {
-        $urlPair = $this->storeUrlPairService->storeIfNotExist($request->getLongUrl());
+        $urlPair = $this->storeUrlPairService->storeIfNotExist(
+            $request->getLongUrl()
+        );
 
         return response()->json([
             'success' => true,

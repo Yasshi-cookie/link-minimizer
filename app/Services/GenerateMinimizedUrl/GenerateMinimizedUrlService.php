@@ -25,15 +25,16 @@ class GenerateMinimizedUrlService
      * @param NaturalNumberValueObject $naturalNumber
      * @return string
      */
-    private function base62Encode(NaturalNumberValueObject $naturalNumber): string
-    {
+    private function base62Encode(
+        NaturalNumberValueObject $naturalNumber
+    ): string {
         $num = $naturalNumber->getValue();
 
         $response = '';
 
         while ($num > 0) {
             $remainder = $num % 62;
-            $num = (int)($num / 62);
+            $num = (int) ($num / 62);
             $response = self::CHARS[$remainder] . $response;
         }
 
