@@ -6,7 +6,8 @@
 
 namespace App\Models;
 
-use App\ValueObjects\RedirectableUrl;
+use App\ValueObjects\MinimizedUrl;
+use App\ValueObjects\UrlPairId;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -43,11 +44,19 @@ class UrlPair extends Model
     protected $fillable = ['user_id', 'minimized_url', 'original_url'];
 
     /**
-     * @return RedirectableUrl
+     * @return UrlPairId
      */
-    public function getMinimizedUrl(): RedirectableUrl
+    public function getId(): UrlPairId
     {
-        return new RedirectableUrl($this->minimized_url);
+        return new UrlPairId($this->id);
+    }
+
+    /**
+     * @return MinimizedUrl
+     */
+    public function getMinimizedUrl(): MinimizedUrl
+    {
+        return new MinimizedUrl($this->minimized_url);
     }
 
     /*
