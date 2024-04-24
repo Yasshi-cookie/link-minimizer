@@ -19,9 +19,20 @@ class UrlMinimizeController extends Controller
      */
     public function minimize(UrlMinimizeRequest $request): JsonResponse
     {
-        $urlPair = $this->storeUrlPairService->storeIfNotExist(
-            $request->getLongUrl()
-        );
+        try {
+            $urlPair = $this->storeUrlPairService->storeIfNotExist(
+                $request->getLongUrl()
+            );
+        } catch (\Throwable $th) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => '短縮URLの生成に失敗しました。',
+                    'data' => [],
+                ],
+                500
+            );
+        }
 
         return response()->json([
             'success' => true,

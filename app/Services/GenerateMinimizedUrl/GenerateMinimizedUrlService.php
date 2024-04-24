@@ -2,8 +2,11 @@
 
 namespace App\Services\GenerateMinimizedUrl;
 
+use App\Services\GenerateMinimizedUrl\Exceptions\FailToGenerateMinimizedUrlException;
 use App\ValueObjects\Bases\NaturalNumberValueObject;
 use App\ValueObjects\MinimizedUrl;
+use Illuminate\Support\Facades\Log;
+use OutOfRangeException;
 
 class GenerateMinimizedUrlService
 {
@@ -13,11 +16,17 @@ class GenerateMinimizedUrlService
     /**
      * @param NaturalNumberValueObject $number
      * @return MinimizedUrl
+     * @throws FailToGenerateMinimizedUrlException
      */
     public function generateFromUrlPairId(
         NaturalNumberValueObject $number
     ): MinimizedUrl {
-        $base62EncodedValue = $this->base62Encode($number);
+        try {
+            $base62EncodedValue = $this->base62Encode($number);
+        } catch (OutOfRangeException $e) {
+            Log::error($e);
+            throw new FailToGenerateMinimizedUrlException();
+        }
 
         return new MinimizedUrl($base62EncodedValue);
     }
@@ -25,6 +34,7 @@ class GenerateMinimizedUrlService
     /**
      * @param NaturalNumberValueObject $naturalNumber
      * @return string
+     * @throws OutOfRangeException
      */
     private function base62Encode(
         NaturalNumberValueObject $naturalNumber
@@ -36,6 +46,11 @@ class GenerateMinimizedUrlService
         while ($num > 0) {
             $remainder = $num % 62;
             $num = (int) ($num / 62);
+
+            if (!isset(self::CHARS[$remainder])) {
+                throw new OutOfRangeException('base62エンコードできない値です: ' . $remainder);
+            }
+
             $response = self::CHARS[$remainder] . $response;
         }
 
