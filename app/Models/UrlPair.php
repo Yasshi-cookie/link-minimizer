@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use App\ValueObjects\MinimizedUrl;
+use App\ValueObjects\OriginalUrl;
 use App\ValueObjects\UrlPairId;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -51,5 +52,13 @@ class UrlPair extends Model
     public function getMinimizedUrl(): MinimizedUrl
     {
         return new MinimizedUrl($this->minimized_url);
+    }
+
+    /**
+     * @return OriginalUrl
+     */
+    public function getOriginalUrl(): OriginalUrl
+    {
+        return new OriginalUrl($this->original_url);
     }
 }
