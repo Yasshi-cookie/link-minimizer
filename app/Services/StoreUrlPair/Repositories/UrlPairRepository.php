@@ -33,7 +33,7 @@ class UrlPairRepository
             $generateMinimizedUrlService = app()->make(
                 GenerateMinimizedUrlService::class
             );
-            $minimizedUrl = $generateMinimizedUrlService->generateFromUrlPairId(
+            $minimizedUrl = $generateMinimizedUrlService->generateFromNaturalNumber(
                 $urlPair->getId()
             );
 

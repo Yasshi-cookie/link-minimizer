@@ -18,7 +18,7 @@ class GenerateMinimizedUrlService
      * @return MinimizedUrl
      * @throws FailToGenerateMinimizedUrlException
      */
-    public function generateFromUrlPairId(
+    public function generateFromNaturalNumber(
         NaturalNumberValueObject $number
     ): MinimizedUrl {
         try {
