@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RedirectToOriginalUrlController;
 use App\Http\Controllers\UrlMinimizeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,3 +26,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
  * URL短縮
  */
 Route::post('/minimize', [UrlMinimizeController::class, 'minimize']);
+
+/**
+ * リダイレクトAPI
+ */
+Route::get('/go/{minimized_url}', [RedirectToOriginalUrlController::class, 'redirect']);
