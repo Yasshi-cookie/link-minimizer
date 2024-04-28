@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|UrlPair query()
  * @method static \Illuminate\Database\Eloquent\Builder|UrlPair whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UrlPair whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UrlPair whereUrlPair($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UrlPair whereMinimizedUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UrlPair whereOriginalUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UrlPair whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UrlPair whereUserId($value)
