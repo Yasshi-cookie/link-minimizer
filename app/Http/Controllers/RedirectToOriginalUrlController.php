@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RedirectToOriginalUrlRequest;
 use App\Services\GetUrlPair\Exceptions\NotFoundUrlPairException;
 use App\Services\GetUrlPair\GetUrlPairService;
+use Illuminate\Support\Facades\Log;
 
 class RedirectToOriginalUrlController extends Controller
 {
@@ -25,6 +26,7 @@ class RedirectToOriginalUrlController extends Controller
                 $request->getMinimizedUrl()
             );
         } catch (NotFoundUrlPairException $e) {
+            Log::error('URL not found: ' . $request->getMinimizedUrl()->getFullUrl());
             return response()->json(
                 [
                     'success' => false,
@@ -34,6 +36,7 @@ class RedirectToOriginalUrlController extends Controller
                 404
             );
         } catch (\Throwable $th) {
+            Log::error('Unexpected error occurred: ' . $th->getMessage());
             return response()->json(
                 [
                     'success' => false,
