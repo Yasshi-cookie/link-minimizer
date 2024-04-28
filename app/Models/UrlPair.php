@@ -15,12 +15,10 @@ use Illuminate\Database\Eloquent\Model;
  * Class UrlPair
  *
  * @property int $id
- * @property int $user_id
  * @property string $minimized_url
  * @property string $original_url
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @property User $user
  * @package App\Models
  * @method static \Illuminate\Database\Eloquent\Builder|UrlPair newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UrlPair newQuery()
@@ -37,11 +35,7 @@ class UrlPair extends Model
 {
     protected $table = 'url_pairs';
 
-    protected $casts = [
-        'user_id' => 'int',
-    ];
-
-    protected $fillable = ['user_id', 'minimized_url', 'original_url'];
+    protected $fillable = ['minimized_url', 'original_url'];
 
     /**
      * @return UrlPairId
@@ -57,16 +51,5 @@ class UrlPair extends Model
     public function getMinimizedUrl(): MinimizedUrl
     {
         return new MinimizedUrl($this->minimized_url);
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | relations
-    |--------------------------------------------------------------------------
-    */
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 }

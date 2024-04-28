@@ -24,7 +24,6 @@ class UrlPairRepository
         try {
             /** @var UrlPair */
             $urlPair = UrlPair::create([
-                'user_id' => auth()->id(),
                 'minimized_url' => '',
                 'original_url' => $originalUrl->getValue(),
             ]);
@@ -68,8 +67,6 @@ class UrlPairRepository
      */
     public function getByOriginalUrl(OriginalUrl $originalUrl): Collection
     {
-        return UrlPair::whereUserId(auth()->id())
-            ->whereOriginalUrl($originalUrl->getValue())
-            ->get();
+        return UrlPair::whereOriginalUrl($originalUrl->getValue())->get();
     }
 }
